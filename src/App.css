@@ -1,1 +1,46 @@
-.App {}
+html,
+body {
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+   height: 100%;
+   width: 100%;
+}
+
+/* 바디 폰트 */
+body {
+   font-family: "Malgun Gothic", "Nanum Gothic", dotum, Arial, verdana, sans-serif;
+}
+
+/* main.scss */
+#root {
+   width: inherit;
+   height: inherit;
+}
+
+.header {
+   display: flex;
+   width: 120rem;
+   padding-top: 60px;
+   justify-content: center;
+   align-items: center;
+   border: 1px red solid;
+}
+
+.menu {
+   display: flex;
+   width: 120rem;
+   height: 63.75rem;
+   padding-left: 0px;
+   justify-content: flex-end;
+   align-items: center;
+   flex-shrink: 0;
+   border: 1px orange solid;
+}
+
+.main {
+   width: 107.5rem;
+   height: 63.75rem;
+   flex-shrink: 0;
+   border: 1px yellowgreen solid;
+}
