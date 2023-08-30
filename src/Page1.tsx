@@ -1,7 +1,9 @@
-import React from 'react'
+import './App.css';
 
 export default function Page1() {
    return (
-      <div>Page1</div>
+      <>
+         <div>Page1</div>
+      </>
    )
 }

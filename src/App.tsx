@@ -2,159 +2,123 @@ import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 import './App.css';
 import Home from './Home';
 import Page1 from './Page1';
-import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
-import React from 'react';
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-function App() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+import { AppBar, Button, Divider, ListItemIcon, ListItemText, Menu, MenuItem, MenuList, Toolbar, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Check } from '@mui/icons-material';
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+export default function App() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
+  const open1 = Boolean(anchorEl1);
+  const handleClick1 = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl1(event.currentTarget);
+  };
+  const handleClose1 = () => {
+    setAnchorEl1(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   return (
     <>
       <div id="headWapper">
-        <div className="header">
-          <Toolbar style={{
-            minHeight: "60px",
-            height: "60px"
-          }}>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' } }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO
-            </Typography>
-
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
+        <BrowserRouter>
+          <AppBar style={{
+            height: "60px",
+          }} position="static">
+            <Toolbar style={{
+              height: "60px",
+            }} variant="dense">
+              <Typography variant="h6" color="inherit">
+                Title
+              </Typography>
+              <Button
+                id="basic-button"
                 color="inherit"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
               >
-                <MenuIcon />
-              </IconButton>
+                Dashboard
+              </Button>
               <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleClose}><Link style={{
+                  textDecorationLine: "none",
+                  color: "inherit",
+                }} to="/">홈가기</Link></MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
-            </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              ))}
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
+              <Button
+                id="menu2"
+                color="inherit"
+                aria-controls={open1 ? 'menu2' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open1 ? 'true' : undefined}
+                onClick={handleClick1}
+              >menu2</Button>
               <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                id="menu2"
+                anchorEl={anchorEl1}
+                open={open1}
+                onClose={handleClose1}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
                 }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                <MenuList style={{
+                  display: "contents",
+                }} dense>
+                  <MenuItem>
+                    <ListItemText inset><Link style={{
+                      textDecorationLine: "none",
+                      color: "inherit",
+                    }} to="page1">Page1</Link></ListItemText>
                   </MenuItem>
-                ))}
+                  <MenuItem>
+                    <ListItemText inset>1.15</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemText inset>Double</ListItemText>
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <ListItemText>Add space before paragraph</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemText>Add space after paragraph</ListItemText>
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <ListItemText>Custom spacing...</ListItemText>
+                  </MenuItem>
+                </MenuList>
               </Menu>
-            </Box>
-          </Toolbar>
-        </div>
-
+            </Toolbar>
+          </AppBar>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/page1" element={<Page1 />} />
+          </Routes>
+        </BrowserRouter>
       </div>
       <div id="sideWapper">
-        <BrowserRouter>
+        {/* <BrowserRouter>
           <ul>
             <li><Link to="/">홈가기</Link></li>
             <li><Link to="page1">page1</Link></li>
@@ -163,7 +127,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/page1" element={<Page1 />} />
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </div>
       <div id="contentsWrapper">
         <div className="contentsTitle">contentTitle</div>
@@ -172,5 +136,3 @@ function App() {
     </>
   );
 }
-
-export default App;
