@@ -1,9 +1,11 @@
 import './App.css';
+import { Link, Outlet } from 'react-router-dom'
 
 export default function Page1() {
    return (
       <>
-         <div>Page1</div>
+         {/* <Link to="location">location</Link>
+         <Outlet /> */}
       </>
    )
 }
